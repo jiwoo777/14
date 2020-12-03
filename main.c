@@ -3,20 +3,29 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+struct Book{
+	int number;
+	char title[20];
+}; 
+
 void main(void){
-	char *pc = NULL;
-	int i =0;
+	struct Book *p;
 	
-	pc = (char*)malloc(100*sizeof(char));//멜록을 통해 100바이트 메모리 할당 받음. 
-	if(pc == NULL){
+	p = (struct Book*)malloc(2*sizeof(struct Book));
+	//Book 구조체 2개 동적 할당 
+	
+	if(p==NULL){
 		printf("메모리 할당 오류\n");
-		exit(1);//에러 헨들링 코드  
+		return;
 	}
-	//할당이 잘 된 경우만 아래 동장 
-	for(i=0; i<26; i++){
-		pc[i] = 'a'+i;
-	}
-	pc[i] = 0;
-	printf("%s\n", pc);
-	free(pc);
+	
+	p -> number = 1;
+	strcpy(p->title, "C Programming");
+	
+	(p+1) -> number = 2;
+	strcpy((p+1)->title, "Electronics");
+	
+	printf("%s %s\n", p->title, (p+1)->title);
+	free(p);
+	return;
 }
